@@ -1,0 +1,82 @@
+// Ec.Cuadratica.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <math.h>
+
+using namespace std;
+
+float discriminante (float a, float b, float c);
+float solunica (float a, float b);
+float reales (float a, float b, float dis, float &x1);
+float imaginarias (float a, float b,float dis, float &xR);
+
+void main()
+{
+	float a, b, c, D, x, sol1, x2, xr, xi;
+	char resp;
+	do{
+	cout<<"Ingrese a: ";
+	cin>>a;
+	cout<<"Ingrese b: ";
+	cin>>b;
+	cout<<"Ingrese c: ";
+	cin>>c;
+	D=discriminante(a,b,c);
+	if(D==0)
+	cout<<"La solucion unica: "<<solunica (a,b);
+	else
+	if(D>0)
+	{
+	cout<<"Soluciones reales: "<<endl;
+	cout<<"Solucion 1: "<<reales(a,b,D,sol1)<<endl;
+	cout<<"Solucion 2: "<<sol1;
+	}
+	else
+	{
+	cout<<"Soluciones imaginarias: "<<endl;
+	xr=imaginarias(a, b, D, xi);
+	cout<<"Solucion 1: "<<xr<<"+"<<xi<<"i"<<endl;
+	cout<<"Solucion 2: "<<xr<<"-"<<xi<<"i"<<endl;
+	}
+
+	getch ();
+
+	cout<<"Deseas continuar: ";
+	cin>>resp;
+	}while (resp=='s');
+
+	getch ();
+}
+
+float discriminante (float a, float b, float c)
+{
+	float D;
+	D=b*b-4*a*c;
+	return D;
+}
+
+float solunica (float a, float b)
+{
+	float D;
+	D=-b/2*a;
+	return D;
+}
+
+float reales (float a, float b, float dis, float &x1)
+{
+	float x2;
+	x1=(-b+(sqrt(dis)))/(2*a);
+	x2=(-b-(sqrt(dis)))/(2*a);
+	return x2;
+}
+
+float imaginarias (float a, float b,float dis, float &xi)
+{
+	float xr;
+	xr=(-b)/(2*a);
+	xi=(sqrt(-dis))/(2*a);
+	return xr;
+}
